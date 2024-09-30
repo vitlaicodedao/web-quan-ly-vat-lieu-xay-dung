@@ -1,9 +1,6 @@
 package web.project.quanlyvlxd.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToMany;
+import jakarta.persistence.*;
 import jakarta.validation.constraints.Positive;
 import lombok.*;
 
@@ -29,6 +26,9 @@ public class Material extends Base{
     @ManyToOne(fetch = FetchType.LAZY)
     private MaterialType materialType;
 
-    @OneToMany(mappedBy = "material")
-    private List<InvoiceDetail> invoiceDetails;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "importMaterial")
+    List<ImportInvoice> importInvoices;
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "exportMaterial")
+    List<ExportInvoice> exportInvoices;
 }

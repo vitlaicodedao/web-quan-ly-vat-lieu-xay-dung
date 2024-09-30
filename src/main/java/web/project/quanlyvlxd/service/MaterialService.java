@@ -35,17 +35,38 @@ public class MaterialService {
         System.out.println(savedFileResult);
     }
 
+    public void save(Material material){
+        materialRepository.save(material);
+    }
+
     private Material mapDtoToObj(MaterialDto materialDto){
         MaterialType materialType = materialTypeRepository.findById(materialDto.getMaterialTypeId()).get();
-        return Material.builder()
+        Material material = Material.builder()
                 .name(materialDto.getName())
                 .price(materialDto.getPrice())
                 .origin(materialDto.getOrigin())
                 .quantity(materialDto.getQuantity())
-                .origin(materialDto.getOrigin())
                 .soldQuantity(materialDto.getSoldQuantity())
                 .materialType(materialType)
                 .image(materialDto.getImage().getOriginalFilename())
                 .build();
+        material.setId(materialDto.getId());
+        return material;
+    }
+
+    public Material getById(Integer id){
+        return materialRepository.findById(id).get();
+    }
+
+    public MaterialDto mapObjToDto(Material material) {
+        return MaterialDto.builder()
+                .id(material.getId())
+                .name(material.getName())
+                .price(material.getPrice())
+                .origin(material.getOrigin())
+                .quantity(material.getQuantity())
+                .soldQuantity(material.getSoldQuantity())
+                .materialTypeId(material.getMaterialType().getId())
+                .imageName(material.getImage()).build();
     }
 }

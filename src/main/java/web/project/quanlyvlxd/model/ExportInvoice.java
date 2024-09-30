@@ -5,18 +5,21 @@ import jakarta.persistence.FetchType;
 import jakarta.persistence.ManyToOne;
 import lombok.*;
 
+import java.sql.Date;
+
+@Entity
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-@Entity
-public class InvoiceDetail extends Base{
-    private Integer quantity;
-
+public class ExportInvoice extends Base{
     @ManyToOne(fetch = FetchType.LAZY)
-    private Material material;
+    private Material exportMaterial;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    private Invoice invoice;
+    private Integer exportQuantity;
+
+    private Date exportDate;
+
+    private String distributor;
 }

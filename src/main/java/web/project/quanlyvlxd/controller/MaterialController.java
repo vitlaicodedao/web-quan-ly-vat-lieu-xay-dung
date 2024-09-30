@@ -38,11 +38,18 @@ public class MaterialController {
         return "material/add-edit-material";
     }
 
-
     @PostMapping("/save")
     public String save(@ModelAttribute("material") MaterialDto materialDto){
         materialService.save(materialDto);
         return "redirect:/material";
     }
 
+    @GetMapping("/edit/{id}")
+    public String edit(@PathVariable Integer id, Model model){
+        Material material = materialService.getById(id);
+        MaterialDto materialDto = materialService.mapObjToDto(material);
+        model.addAttribute("material", materialDto);
+        model.addAttribute("materialTypes", materialTypeService.findAll());
+        return "material/add-edit-material";
+    }
 }

@@ -1,17 +1,15 @@
 package web.project.quanlyvlxd.dto;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 import org.springframework.web.multipart.MultipartFile;
 
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 public class MaterialDto {
-    private String id;
+    private Integer id;
     private String name;
     private Double price;
     private Integer quantity;
@@ -19,4 +17,5 @@ public class MaterialDto {
     private String origin;
     private Integer materialTypeId;
     private MultipartFile image;
+    private String imageName;
 }
